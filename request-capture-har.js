@@ -70,7 +70,7 @@ HarWrapper.prototype.saveHar = function (fileName) {
   fs.writeFileSync(fileName, JSON.stringify(httpArchive, null, 2));
 };
 
-HarWrapper.prototype.toString = function (fileName) {
+HarWrapper.prototype.toJSON = function (fileName) {
   var httpArchive = {
     log: {
       version: '1.2',
@@ -84,7 +84,7 @@ HarWrapper.prototype.toString = function (fileName) {
       entries: this.entries
     }
   };
-  return JSON.stringify(httpArchive, null, 2);
+  return httpArchive;
 };
 
 
