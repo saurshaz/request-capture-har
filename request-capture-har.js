@@ -70,6 +70,25 @@ HarWrapper.prototype.saveHar = function (fileName) {
   fs.writeFileSync(fileName, JSON.stringify(httpArchive, null, 2));
 };
 
+HarWrapper.prototype.toString = function (fileName) {
+  var httpArchive = {
+    log: {
+      version: '1.2',
+      creator: {name: 'request-capture-har', version: pkg.version},
+      pages: [{
+        startedDateTime: new Date(this.earliestTime).toISOString(),
+        id: 'request-capture-har',
+        title: 'request-capture-har',
+        pageTimings: { }
+      }],
+      entries: this.entries
+    }
+  };
+  return JSON.stringify(httpArchive, null, 2);
+};
+
+
+
 HarWrapper.prototype.buildTimings = function (entry, response) {
   var startTs = response.request.startTime;
   if (!startTs) return;
